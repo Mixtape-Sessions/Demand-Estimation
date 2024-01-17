@@ -26,9 +26,15 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 <b>Slides</b>
 
-- [Day 1 Slides](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
+[Day 1](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
+
+<b>Exercise</b>
+
+[Exercise 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/README.md)
 
 </details>
+
+<br/>
 
 <details open><summary><b>Day 2</b></summary><br/>
 
@@ -42,9 +48,15 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 <b>Slides</b>
 
-- [Day 2 Slides](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
+[Day 2](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
+
+<b>Exercise</b>
+
+[Exercise 2](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/README.md)
 
 </details>
+
+<br/>
 
 <details open><summary><b>Day 3</b></summary><br/>
 
@@ -57,7 +69,11 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 <b>Slides</b>
 
-- [Day 3 Slides](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
+[Day 3](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
+
+<b>Exercise</b>
+
+[Exercise 3](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/README.md)
 
 </details>
 
