@@ -1,0 +1,420 @@
+\documentclass[aspectratio=169,t,11pt,table]{beamer}
+\input{includes/preamble.tex}
+\begin{document}
+
+\imageframe{includes/banner.png}
+
+\begin{frame}{Who Am I?}
+    \begin{wideitemize}
+        \item A fifth-year Economics PhD candidate at Harvard University.
+        \pause
+        \item Making BLP-style estimation more accessible to researchers.
+        \begin{itemize}
+            \item Best practices papers \citep{conlon2020best,conlon2023incorporating}.
+            \item Open-source Python package\defcitealias{pyblp}{PyBLP}\citepalias{pyblp}.
+            \item This course!
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{This Course}
+    \begin{wideitemize}
+        \item Three days, 6pm-9pm.
+        \begin{enumerate}
+            \item Today: BLP model, pure logit, price endogeneity.
+            \item Wednesday: Mixed logit, identification, numerical best practices.
+            \item Friday: Micro BLP, consumer survey data, other extensions.
+        \end{enumerate}
+        \pause
+        \item Please participate and ask questions!
+        \begin{itemize}
+            \item Ask questions in the Discord chat or raise your hand on Zoom.
+        \end{itemize}
+        \pause
+        \item Three coding exercises, one after each day.
+        \begin{itemize}
+            \item Try these on your own or with your classmates' help. Use Discord rooms!
+            \item I'll do the first two exercises live at the start of days 2 and 3. We'll post solutions.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Running Example}
+    \begin{wideitemize}
+        \item BLP can be used to better understand all sorts of decisions.
+        \begin{itemize}
+            \item Product purchases, hospital visits, school choice, voting behavior, etc.
+        \end{itemize}
+        \pause
+        \item Typically used for \alert{counterfactual analysis} of something that hasn't happened.
+        \begin{itemize}
+            \item Need a structural model when we can't just estimate a treatment effect.
+        \end{itemize}
+        \pause
+        \item Running example: \alert{What if we halved an important product's price?}
+        \begin{itemize}
+            \item Practitioners: Increased sales vs.\ cannibalization?
+            \item Regulators: Revenue loss from eliminating a tax?
+            \item Academics: Welfare consequences?
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\section{The BLP Model}
+
+\begin{frame}{Model Overview}
+    \begin{wideitemize}
+        \item Model of individuals making a discrete choice from different alternatives.
+        \begin{itemize}
+            \item Original\defcitealias{berry1995automobile}{BLP (1995)}\citetalias{berry1995automobile} also modeled firm price-setting. We'll focus on demand.
+        \end{itemize}
+        \pause
+        \item Choices are made in \alert{markets} denoted by $t \in \mathcal{T}$.
+        \begin{itemize}
+            \item Time periods, geographic regions, etc.
+        \end{itemize}
+        \pause
+        \item Each market has \alert{individuals} with types denoted by $i \in \mathcal{I}_t$.
+        \begin{itemize}
+            \item Different demographics and preferences.
+        \end{itemize}
+        \pause
+        \item Individuals are faced with \alert{choices} denoted by $j \in \mathcal{J}_t$.
+        \begin{itemize}
+            \item Products, hospitals, candidates, etc.
+            \item Outside option $j = 0$: no purchase, no treatment, no vote, etc.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Utility Maximization}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} \only<2->{= \alert<3>{\delta_{jt}} + \alert<4>{\mu_{ijt}} + \alert<5>{\varepsilon_{ijt}}}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Individuals choose an alternative to maximize (indirect) utility $u_{ijt}$.
+        \begin{itemize}
+            \item We will specify a function for $u_{ijt}$ and use revealed preference to estimate it.
+        \end{itemize}
+        \pause
+        \item Will help to decompose utility into three parts.
+        \pause
+        \begin{enumerate}
+            \item Mean utility $\alert<3>{\delta_{jt}}$: Average preference across all individuals in the market.
+            \pause
+            \item Heterogeneous utility $\alert<4>{\mu_{ijt}}$: Different preferences, e.g.\ due to different demographics.
+            \pause
+            \item Idiosyncratic preferences $\alert<5>{\varepsilon_{ijt}}$: Superimposed noise that accommodates estimation.
+        \end{enumerate}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Aggregate Market Shares}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} = \delta_{jt} + \mu_{ijt} + \varepsilon_{ijt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Assume a convenient distribution for $\varepsilon_{ijt}$: iid type I extreme value (``logit shocks'').
+        \begin{itemize}
+            \item Want $\mu_{ijt}$ to be sufficiently flexible that this convenient assumption matters little.
+            \item Possible to eliminate $\varepsilon_{ijt}$ but computation gets difficult \citep{berry2007pure}.
+        \end{itemize}
+        \pause
+        \item Aggregating over individuals with type sampling weights $w_{it}$ gives market shares:
+        \begin{minipage}[c][3\baselineskip][c]{\textwidth}
+            \begin{equation*}
+                s_{jt} = \sum_{i \in \mathcal{I}_t} w_{it} \cdot s_{ijt} \quad\text{where}\quad s_{ijt} = \alt<2>{\Pr_{\varepsilon_{it}}\Big(u_{ijt} \geq u_{ikt} \text{ for all } k \in \mathcal{J}_t \cup \{0\}\Big)}{\frac{\exp(\delta_{jt} + \mu_{ijt})}{\sum_{k \in \mathcal{J}_t \cup \{0\}} \exp(\delta_{kt} + \mu_{ikt})}}
+            \end{equation*}
+        \end{minipage}
+        \vspace{-\baselineskip}
+        \pause\pause
+        \item We'll match these to observed quantities $q_{jt} = s_{jt} \cdot M_t$ in our data.
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Choosing a Market Size}
+    \begin{wideitemize}
+        \item In our data, we observe quantities $q_{jt} = s_{jt} \cdot M_t$.
+        \begin{itemize}
+            \item Need to divide by some market size $M_t$ to get our model's market shares $s_{jt}$.
+        \end{itemize}
+        \pause
+        \item Sometimes the choice of market size is straightforward.
+        \begin{itemize}
+            \item Market size for drugs to treat a condition is how many people have that condition.
+        \end{itemize}
+        \pause
+        \item But typically, the choice of market size is \alert{neither easy nor innocuous}.
+        \begin{itemize}
+            \item E.g.\ how many choices of which cereal to buy are made every day in a specific city?
+            \item Population $\times$ max cereals per day? Foot traffic estimate $\times$ max cereals per trip?
+        \end{itemize}
+        \pause
+        \item You should try different assumptions and see how they change your results.
+        \begin{itemize}
+            \item In general, the bigger the market size, the more substitution to the outside good.
+            \item We'll learn how to discipline these assumptions with data on day 3.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Identification and Normalizations}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} = \delta_{jt} + \mu_{ijt} + \varepsilon_{ijt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item We will estimate our utility function with \alert{revealed preference}.
+        \begin{itemize}
+            \item Holding $\mu_{ijt}$ fixed, a higher quantity $q_{jt} > q_{kt}$ implies a higher mean utility $\delta_{jt} > \delta_{kt}$.
+        \end{itemize}
+        \pause
+        \item Utility is invariant to positive affine transformations. Need two normalizations.
+        \only<2>{
+            \vspace{-0.5\baselineskip}
+            \begin{equation*}
+                u_{ijt} > u_{ikt} \quad\xLeftrightarrow{b > 0}\quad a + b \cdot u_{ijt} > a + b \cdot u_{ikt}
+            \end{equation*}
+        }
+        \pause
+        \begin{enumerate}
+            \item[a.] \alert{Level}: We'll set $u_{i0t} = \varepsilon_{i0t}$. Estimates are relative to outside option utility.
+            \pause
+            \item[b.] \alert{Scale}: Already set $\Var(\varepsilon_{ijt}) = \pi^2 / 6$. Estimates are relative to scale of noise.
+        \end{enumerate}
+        \pause
+        \item Now that our model can in theory be identified, how do we estimate it?
+    \end{wideitemize}
+\end{frame}
+
+\section{Pure Logit Estimation}
+
+\begin{frame}{Pure Logit Model}
+    \vspace{-\baselineskip}
+    \begin{minipage}[c][4\baselineskip][c]{\textwidth}
+        \begin{equation*}
+            \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} = \delta_{jt} \only<1>{+ \alert{\cancelto{0}{\mu_{ijt}}}} + \varepsilon_{ijt} \only<2->{\quad\implies\quad \alert<2>{s_{jt}} = \frac{\exp \delta_{jt}}{\alt<2>{\sum_{k \in \mathcal{J}_t \cup \{0\}}}{\alert<3>{1} + \sum_{k \in \mathcal{J}_t}} \exp \delta_{kt}}} \only<4->{\quad\implies\quad \log\frac{s_{jt}}{s_{0t}} = \alert{\delta_{jt}}}
+        \end{equation*}
+    \end{minipage}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Start with the simplest case: no heterogenous utility. We'll add $\mu_{ijt}$ back on day 2.
+        \pause
+        \item Market shares simplify. No aggregation over individual types.
+        \pause
+        \begin{itemize}
+            \item The \alert<3>{1} in the denominator is from our level normalization $u_{i0t} = \varepsilon_{i0t}$.
+        \end{itemize}
+        \pause
+        \item We can recover mean utilities from observed market shares \citep{berry1994estimating}.
+        \begin{itemize}
+            \item If we specify a function for $\delta_{jt}$, we'll have a linear regression!
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Pure Logit Estimating Equation}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \log\frac{s_{jt}}{s_{0t}} = \delta_{jt} \only<2->{= \alpha p_{jt} + x_{jt}'\beta + \alert<3>{\xi_{jt}}}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Running example: What if we halved an important product's price?
+        \begin{itemize}
+            \item In your exercise, products $j$ are breakfast cereals; markets $t$ are city-quarters.
+            \item If we estimate the model, we can change $p_{jt}$ and estimate how consumers react.
+        \end{itemize}
+        \pause
+        \item Specify $\delta_{jt}$ as a function of price $p_{jt}$ and other product characteristics $x_{jt}$.
+        \begin{itemize}
+            \item In your exercise, $p_{jt}$ is per serving; $x_{jt}$ includes a constant, a ``mushy'' dummy, etc.
+        \end{itemize}
+        \pause
+        \item Interpret the regression error $\alert<3>{\xi_{jt}}$ as unobserved product quality not in our data.
+        \begin{itemize}
+            \item Unobserved characteristics, advertising, average taste variation, etc.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Interpreting Parameters}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \log\frac{s_{jt}}{s_{0t}} = \delta_{jt} = \alert<2-3>{\alpha} p_{jt} + x_{jt}'\alert<4>{\beta} + \xi_{jt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Let's say we estimate this equation. How to interpret our parameter estimates?
+        \pause
+        \item Prices are in dollars, so the units of $\alpha$ are ``utils'' per dollar. Not very helpful.
+        \pause
+        \begin{itemize}
+            \item Instead, report own-price elasticities, or a quantity-weighted average/median.
+        \end{itemize}
+        \vspace{\baselineskip}
+        \begin{equation*}
+            \eta_{jjt} = \frac{\partial\log q_{jt}}{\partial\log p_{jt}} = \frac{\partial q_{jt}}{\partial p_{jt}} \frac{p_{jt}}{q_{jt}} = \frac{\partial s_{jt}}{\partial p_{jt}} \frac{p_{jt}}{s_{jt}} = \alpha \cdot p_{jt} \cdot (1 - s_{jt})
+        \end{equation*}
+        \vspace{-0.5\baselineskip}
+        \pause
+        \item If $x_{jt}$ is a ``mushy'' cereal dummy, $\beta$ is ``utils'' from mushyness. Again, not helpful.
+        \pause
+        \begin{itemize}
+            \item Instead, report $\beta / \alpha$, the dollar willingness to pay for mushyness.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\section{Price Endogeneity}
+
+\begin{frame}{Endogeneity Concerns}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \delta_{jt} = \alpha p_{jt} + x_{jt}'\beta + \xi_{jt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item In your coding exercise, you'll run an OLS regression of $\delta_{jt}$ on $p_{jt}$ and $x_{jt}$.
+        \pause
+        \item As usual, if a regressor is correlated with the error, then its coefficient is biased.
+        \pause
+        \item Typically, we expect price to be strongly correlated with unobserved quality.
+        \begin{itemize}
+            \item Firms know more than us about demand when setting prices.
+            \item Often, $\Cov(p_{jt}, \xi_{jt}) > 0$, so $\hat{\alpha} < 0$ is biased towards zero.
+        \end{itemize}
+        \pause
+        \item Today we'll focus on handling just price endogeneity for simplicity.
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Fixed Effects}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \delta_{jt} = \alpha p_{jt} + x_{jt}'\beta + \xi_{jt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item Adding product and market fixed effects to $x_{jt}$ can help a lot.
+        \begin{itemize}
+            \item E.g.\ if $p_{jt}$ is correlated with product-specific $\xi_j$ in $\xi_{jt} = \xi_j + \xi_t + \Delta\xi_{jt}$.
+            \item But do need multiple observations per product and market to add $\xi_j$ and $\xi_t$.
+            \pause
+            \item Aside: Related to dynamic panel approach. Let $\xi_{jt} = \rho \xi_{jt-1} + \Delta\xi_{jt}$, estimate $\rho$.
+        \end{itemize}
+        \pause
+        \item Modern grocery scanner datasets have many thousands of products/markets.
+        \begin{itemize}
+            \item Dummies take too much memory, so we ``absorb'' them, i.e.\ iteratively de-mean.
+            \item Stata:\defcitealias{reghdfe}{Reghdfe}\citetalias{reghdfe}. R:\defcitealias{fixest}{Fixest}\citetalias{fixest}.  Python:\defcitealias{pyfixest}{PyFixest}\citetalias{pyfixest}. Coding exercise:\defcitealias{pyblp}{PyBLP}\citetalias{pyblp} via\defcitealias{pyhdfe}{PyHDFE}\citetalias{pyhdfe}.
+        \end{itemize}
+        \pause
+        \item Helpful but insufficient. Unobserved quality typically varies by product \textit{and} market.
+        \begin{itemize}
+            \item And if prices don't, then we don't have any variation left to estimate $\alpha$.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Instrumental Variables}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \delta_{jt} = \alpha p_{jt} + x_{jt}'\beta + \xi_{jt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item With or without fixed effects, a carefully-chosen IV can be a good solution.
+        \begin{itemize}
+            \item Relevance: $\Cov(p_{jt}, z_{jt}) \neq 0$. Exclusion: $\Cov(\xi_{jt}, z_{jt}) = 0$.
+        \end{itemize}
+        \pause
+        \item Always run a first-stage regression of $p_{jt}$ on $z_{jt}$ and $x_{jt}$.
+        \begin{itemize}
+            \item Does the sign of the coefficient on $z_{jt}$ make sense?
+            \item Is the instrument strong, or should you worry about weak instruments?
+        \end{itemize}
+        \pause
+        \item Many places to look. I'll discuss the most common ones.
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Typical Instruments for Price}
+    \vspace{-\baselineskip}
+    \begin{equation*}
+        \delta_{jt} = \alpha p_{jt} + x_{jt}'\beta + \xi_{jt}
+    \end{equation*}
+    \vspace{-0.5\baselineskip}
+    \begin{wideitemize}
+        \item \alert{Cost-shifters}: Measures of input prices, tariffs, etc.
+        \only<1>{
+            \begin{itemize}
+                \item Consumers should only care about them through their effect on prices.
+            \end{itemize}
+        }
+        \pause
+        \item \defcitealias{hausman1996valuation}{Hausman}\citetalias{hausman1996valuation}: Price of the same product averaged across \textit{other} locations.
+        \only<2>{
+            \begin{itemize}
+                \item Need costs to be correlated across locations, but not unobserved quality.
+                \item Helpful that retailers tend to do ``uniform pricing'' \citep{dellavigna2019uniform}.
+            \end{itemize}
+        }
+        \pause
+        \item \defcitealias{waldfogel2003preference}{Waldfogel}\citetalias{waldfogel2003preference}: Average consumer characteristics in \textit{nearby} locations.
+        \only<3>{
+            \begin{itemize}
+                \item With uniform pricing, your neighbors' demographics will affect your prices.
+            \end{itemize}
+        }
+        \pause
+        \item \defcitealias{berry1995automobile}{BLP}\citetalias{berry1995automobile}: Average characteristics $x_{kt}$ of \textit{competing} products $k \neq j$.
+        \only<4>{
+            \begin{itemize}
+                \item Price is marginal cost plus a markup. Substitutes affect markups.
+                \item We'll come back to these later, since they can also serve a different purpose.
+            \end{itemize}
+        }
+        \pause
+        \item I recommend starting with just one. A straightforward cost-shifter if you have it.
+    \end{wideitemize}
+\end{frame}
+
+\section{Coding Exercise 1}
+
+\begin{frame}{Coding Exercise 1}
+    \begin{wideitemize}
+        \item Try to do the first exercise before day 2's class, when I'll do it live.
+        \begin{enumerate}
+            \item Getting set up with Python and PyBLP.
+            \item Pure logit estimation.
+            \item Running the price cut counterfactual.
+        \end{enumerate}
+        \pause
+        \item When doing the exercise, think critically about the pure logit model's limitations.
+        \begin{itemize}
+            \item Do the substitution patterns you estimate seem reasonable?
+        \end{itemize}
+        \pause
+        \item If you have time, try the supplemental exercises.
+        \begin{itemize}
+            \item Modeling the supply side.
+            \item Checking your code by simulating data.
+        \end{itemize}
+    \end{wideitemize}
+\end{frame}
+
+\backupbegin
+
+\begin{frame}[allowframebreaks,noframenumbering,plain]{References}
+    \bibliography{includes/references.bib}
+\end{frame}
+
+\backupend
+
+\end{document}

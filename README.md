@@ -17,37 +17,47 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 <details open><summary><b>Day 1</b></summary><br/>
 
 <b>Topics</b>
-- History and motivation for BLP (by Arial Pakes)
-- The BLP model
-- Pure logit estimation
-- Dealing with price endogeneity
-- Exercise 1: Getting set up with PyBLP, estimating the pure logit model, and running a price cut counterfactual.
+
+- History and motivation for BLP (by Ariel Pakes).
+- The BLP model.
+- Pure logit estimation.
+- Price endogeneity.
+- Exercise 1: Getting set up with Python and PyBLP, pure logit estimation, and running a price cut counterfactual.
 
 <b>Slides</b>
+
+[1-Pure-Logit.pdf](Slides/1-Pure-Logit.pdf)
 
 </details>
 
 <details open><summary><b>Day 2</b></summary><br/>
 
 <b>Topics</b>
-- Mixed logit estimation
-- Differentiation instruments
-- Numerical best practices
-- Exercise 2: Adding random coefficients, incorporating consumer demographics, and evaluating improvements to the counterfactual
+
+- Preference heterogeneity.
+- Mixed logit estimation.
+- Numerical best practices.
+- Differentiation instruments.
+- Exercise 2: Incorporating preference heterogeneity, mixed logit estimation, and evaluating improvements to the price cut counterfactual.
 
 <b>Slides</b>
+
+[2-Mixed-Logit.pdf](Slides/2-Mixed-Logit.pdf)
 
 </details>
 
 <details open><summary><b>Day 3</b></summary><br/>
 
 <b>Topics</b>
-- Micro BLP estimation
-- Incorporating consumer survey data
-- An overview of other extensions to the BLP approach
-- Exercise 3: Adding micro moments, adding second choice moments, and evaluating improvements to the counterfactual
+
+- Micro BLP estimation.
+- Choosing micro moments.
+- Using more information.
+- Exercise 3: Incorporating micro moments, micro BLP estimation, and evaluating improvements to the price cut counterfactual.
 
 <b>Slides</b>
+
+[3-Micro-Data.pdf](Slides/3-Micro-Data.pdf)
 
 </details>
 
