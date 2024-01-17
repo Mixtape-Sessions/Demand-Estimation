@@ -46,3 +46,5 @@
 *.synctex.gz(busy)
 *.pdfsync
 
+## Jupyter notebook checkpoints
+.ipynb_checkpoints
