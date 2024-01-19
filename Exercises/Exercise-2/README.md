@@ -19,7 +19,7 @@ Column             | Data Type | Description
 `market`           | String    | The city-quarter pair that defines markets $t$ used in these exercises. The data were motivated by real cereal purchase data across 47 US cities in the first 2 quarters of 1988.
 `quarterly_income` | Float     | The quarterly income of the individual in dollars.
 
-In today and tomorrow's exercises, we will use these demographic data to introduce income-specific preference heterogeneity into our BLP model of demand for cereal and see how our counterfactual changes.
+In today and tomorrow's exercises, we will use these demographic data to introduce income-specific preference heterogeneity into our BLP model of demand for cereal and see how our counterfactual changes. By incorporating income, we will also be able to speak to distributional concerns: how will counterfactual changes in the market differentially affect high- and low-income consumers?
 
 ## Questions
 
@@ -108,7 +108,7 @@ Note that your new random coefficient on price is $\alpha_{it} = \alpha + \sigma
 
 ### 6. Evaluate changes to the price counterfactual
 
-Re-run the price counterfactual and discuss new differences. Do substitution and cannibalization seem more reasonable than before? Is there anything that we were unable to estimate with cross-market product-level variation that you think could have helped further improve substitution patterns?
+Re-run the price counterfactual and discuss new differences. Do substitution and cannibalization seem more reasonable than before? Does the price change seem to differentially affect high- vs. low-income consumers? Is there anything that we were unable to estimate with cross-market product-level variation that you think could have helped further improve substitution patterns?
 
 ## Supplemental Questions
 

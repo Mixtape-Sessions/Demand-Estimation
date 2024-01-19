@@ -21,6 +21,7 @@
         \begin{equation*}
             \log\frac{s_{jt}}{s_{0t}} = \delta_{jt} = \alpha p_{jt} + x_{jt}'\beta + \xi_{jt}
         \end{equation*}
+        \vspace{-\baselineskip}
         \pause
         \item Let's go over your first coding exercise.
     \end{wideitemize}
@@ -119,6 +120,7 @@
         \begin{itemize}
             \item $\Pi$ shifts preferences according to observed demographics $y_{it} \sim $ census.
             \item $\Sigma$ shifts preferences according to unobserved preferences $\nu_{it} \sim N(0, I)$.
+            \item $\Sigma$ is the \textit{Cholesky root} of the variance matrix. Usually diagonal with standard deviations.
         \end{itemize}
     \end{wideitemize}
 \end{frame}
@@ -145,6 +147,10 @@
         \end{itemize}
         \pause
         \item The goal is to have a dataset that reflects the \textit{distribution} of individuals.
+        \begin{itemize}
+            \item Realism aside, this allows us to address distributional concerns.
+            \item E.g.\ will a tax or price change affect high- or low-income individuals differently?
+        \end{itemize}
     \end{wideitemize}
 \end{frame}
 
@@ -228,7 +234,7 @@
         \pause
         \item But there are some numerical best practices that you can follow to avoid these kinds of issues \citep{conlon2020best}.
         \begin{itemize}
-            \item They're likely to be useful for most structural estimation, not just BLP!
+            \item They're likely to be useful for most computation-heavy structural estimation, not just BLP!
         \end{itemize}
     \end{wideitemize}
 \end{frame}

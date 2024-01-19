@@ -164,6 +164,7 @@
         \item In our data, we observe quantities $q_{jt} = s_{jt} \cdot M_t$.
         \begin{itemize}
             \item Need to divide by some market size $M_t$ to get our model's market shares $s_{jt}$.
+            \item Issue here is that we often don't observe the quantity of outside choices $q_{0t}$.
         \end{itemize}
         \pause
         \item Sometimes the choice of market size is straightforward.
@@ -261,7 +262,7 @@
         \pause
         \item Interpret the regression error $\alert<3>{\xi_{jt}}$ as unobserved product quality not in our data.
         \begin{itemize}
-            \item Unobserved characteristics, advertising, average taste variation, etc.
+            \item Unobserved characteristics, advertising, average taste variation, ``demand shocks,'' etc.
         \end{itemize}
     \end{wideitemize}
 \end{frame}
@@ -338,7 +339,7 @@
             \item Stata:\defcitealias{reghdfe}{Reghdfe}\citetalias{reghdfe}. R:\defcitealias{fixest}{Fixest}\citetalias{fixest}.  Python:\defcitealias{pyfixest}{PyFixest}\citetalias{pyfixest}. Coding exercise:\defcitealias{pyblp}{PyBLP}\citetalias{pyblp} via\defcitealias{pyhdfe}{PyHDFE}\citetalias{pyhdfe}.
         \end{itemize}
         \pause
-        \item Helpful but insufficient. Unobserved quality typically varies by product \textit{and} market.
+        \item Helpful but insufficient: $\xi_{jt}$ typically varies by product \textit{and} market.
         \begin{itemize}
             \item And if prices don't, then we don't have any variation left to estimate $\alpha$.
         \end{itemize}
@@ -374,15 +375,22 @@
     \end{equation*}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
-        \item \alert{Cost-shifters}: Measures of input prices, tariffs, etc.
+        \item Typically, prices are marginal costs plus a markup term.
         \only<1>{
+            \begin{itemize}
+                \item We want valid instruments that shift costs and/or markups.
+            \end{itemize}
+        }
+        \pause
+        \item \alert{Cost-shifters}: Measures of input prices, tariffs, etc.
+        \only<2>{
             \begin{itemize}
                 \item Consumers should only care about them through their effect on prices.
             \end{itemize}
         }
         \pause
-        \item \defcitealias{hausman1996valuation}{Hausman}\citetalias{hausman1996valuation}: Price of the same product averaged across \textit{other} locations.
-        \only<2>{
+        \item \defcitealias{hausman1996valuation}{Hausman}\citetalias{hausman1996valuation}: Current price of the same product averaged across \textit{other} locations.
+        \only<3>{
             \begin{itemize}
                 \item Need costs to be correlated across locations, but not unobserved quality.
                 \item Helpful that retailers tend to do ``uniform pricing'' \citep{dellavigna2019uniform}.
@@ -390,16 +398,16 @@
         }
         \pause
         \item \defcitealias{waldfogel2003preference}{Waldfogel}\citetalias{waldfogel2003preference}: Average consumer characteristics in \textit{nearby} locations.
-        \only<3>{
+        \only<4>{
             \begin{itemize}
                 \item With uniform pricing, your neighbors' demographics will affect your prices.
             \end{itemize}
         }
         \pause
         \item \defcitealias{berry1995automobile}{BLP}\citetalias{berry1995automobile}: Average characteristics $x_{kt}$ of \textit{competing} products $k \neq j$.
-        \only<4>{
+        \only<5>{
             \begin{itemize}
-                \item Price is marginal cost plus a markup. Substitutes affect markups.
+                \item Characteristics of competing products affect markups.
                 \item We'll come back to these later, since they can also serve a different purpose.
             \end{itemize}
         }

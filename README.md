@@ -85,13 +85,13 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 ## Readings
 
-<b>Modern</b>
+<b>Modern Guides</b>
 
 - [Berry and Haile (2021)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
 - [Conlon and Gortmaker (2020)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
 - [Conlon and Gortmaker (2023)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2023.pdf)
 
-<b>Older</b>
+<b>Foundational Papers</b>
 
 - [Berry, Levinsohn, and Pakes (1995)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf)
 - [Nevo (2000)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf)
