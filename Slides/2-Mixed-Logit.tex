@@ -92,18 +92,18 @@
 \begin{frame}{Random Coefficients}
     \vspace{-\baselineskip}
     \begin{minipage}[c][4\baselineskip][c]{\textwidth}
-        \only<1-2>{
+        \only<1-3>{
             \begin{equation*}
-                u_{ijt} = x_{jt}'\alt<1>{\beta}{\alert<2>{\beta_{it}}} + \xi_{jt} + \varepsilon_{ijt}
+                u_{ijt} = x_{jt}'\alt<1>{\beta}{\alert<2-3>{\alt<2>{\beta_{it}}{\underbrace{(\beta + \Pi y_{it} + \Sigma \nu_{it})}_{\textstyle\beta_{it}}}}} + \xi_{jt} + \varepsilon_{ijt}
             \end{equation*}
         }
-        \only<3->{
+        \only<4->{
             \begin{equation*}
                 u_{ijt} = \underbrace{x_{jt}'\alert{\beta} + \xi_{jt}}_{\textstyle\delta_{jt}} + \underbrace{x_{jt}'(\alert{\Sigma \nu_{it}} + \alert{\Pi y_{it}})}_{\textstyle\mu_{ijt}} + \varepsilon_{ijt}
             \end{equation*}
         }
     \end{minipage}
-    \vspace{-0.5\baselineskip}
+    \vspace{-1\baselineskip}
     \begin{wideitemize}
         \item How to add preference heterogeneity to our pure logit model?
         \begin{itemize}
@@ -112,14 +112,14 @@
         \pause
         \item Intuitively, we want to replace $\beta$ with \textit{random coefficients} \alert{$\beta_{it}$}.
         \begin{itemize}
-            \item Random in that they're drawn from a distribution of consumer types $i \in \mathcal{I}_t$.
+            \item \textit{Random} in that they're drawn from a distribution of consumer types $i \in \mathcal{I}_t$.
             \item For $x_{jt} = \text{car}_{jt}$ and $\mathcal{I}_t = \{\text{car-lovers}, \text{bus-lovers}\}$, want $\beta_{it} \gg 0$ for car-lovers.
         \end{itemize}
         \pause
-        \item Most common specification is $\beta_{it} \sim N(\beta + \Pi y_{it}, \Sigma\Sigma')$.
+        \item Most common specification is \alert{$\beta_{it} \sim N(\beta + \Pi y_{it}, \Sigma\Sigma')$}.
         \begin{itemize}
-            \item $\Pi$ shifts preferences according to observed demographics $y_{it} \sim $ census.
-            \item $\Sigma$ shifts preferences according to unobserved preferences $\nu_{it} \sim N(0, I)$.
+            \item $\Pi$ shifts preferences according to ``observed'' demographics $y_{it} \sim $ census.
+            \item $\Sigma$ shifts preferences according to ``unobserved'' preferences $\nu_{it} \sim N(0, I)$.
             \item $\Sigma$ is the \textit{Cholesky root} of the variance matrix. Usually diagonal with standard deviations.
         \end{itemize}
     \end{wideitemize}
@@ -136,7 +136,7 @@
     \begin{wideitemize}
         \item In practice, we implement random coefficients by making a new dataset.
         \begin{itemize}
-            \item In PyBLP lingo, ``product data'' rows are $j$'s, and new ``agent data'' rows are $i$'s.
+            \item In PyBLP lingo, ``product data'' rows are $(j, t)$'s, and new ``agent data'' rows are $(i, t)$'s.
         \end{itemize}
         \pause
         \item In your coding exercise, you'll just draw $|\mathcal{I}_t| = 100$ types per market.
@@ -388,7 +388,7 @@
         \pause
         \item \cite{salanie2022fast} approximate the BLP model around $\sigma, \pi \approx 0$:
         \begin{equation*}
-            \log\frac{s_{jt}}{s_{0t}} \approx \beta x_{jt} + \sigma^2 d_{jt}^x + \pi m_t^y x_{jt} + \pi^2 v_t^y d_{jt}^x + \xi_{jt}
+            \log\frac{s_{jt}}{s_{0t}} \approx \beta x_{jt} + \underbrace{\sigma^2 d_{jt}^x + \pi m_t^y x_{jt} + \pi^2 v_t^y d_{jt}^x}_{\text{Defined on the next slide.}} + \xi_{jt}
         \end{equation*}
         \vspace{-1.5\baselineskip}
         \pause

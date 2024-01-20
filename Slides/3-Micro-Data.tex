@@ -45,7 +45,7 @@
             \item Results in unrealistically limited substitution between similar cereals.
         \end{itemize}
         \pause
-        \item Also can't estimate a parameter in $\Pi$ on income alone.
+        \item Also can't estimate a parameter in $\Pi$ on log income alone.
         \begin{itemize}
             \item Market fixed effects are collinear with market-level income means.
             \item Unrealistic that overall cereal preference doesn't vary with income.
@@ -66,11 +66,28 @@
             \item Marketing research datasets (e.g.\ NielsenIQ's Consumer Panel).
             \item Regulatory agencies like the UK's antitrust authority \citep{reynolds2008use}.
         \end{itemize}
-        \pause
+    \end{wideitemize}
+\end{frame}
+
+\begin{frame}{Intuition for the Running Example}
+    \begin{wideitemize}
         \item Imagine surveying people at the supermarket who purchased cereal.
+        \pause
+        \item \alert{``What was your annual income last year?''}
         \begin{itemize}
-            \item ``What was your annual income last year?''
-            \item ``What would you have purchased if your mushy cereal wasn't available?''
+            \item Should be informative about a parameter in $\Pi$ on log income alone.
+            \item Mean income of cereal purchasers targets how income shifts cereal preference.
+        \end{itemize}
+        \pause
+        \item \alert{``Would you have purchased another mushy cereal if your first choice wasn't available?''}
+        \begin{itemize}
+            \item Should be informative about a standard deviation in $\Sigma$ on the mushy dummy.
+            \item Within-mushy substitution is precisely what we hope this parameter will increase!
+        \end{itemize}
+        \pause
+        \item Let's incorporate answers to these questions into estimation.
+        \begin{itemize}
+            \item We'll set up a general framework and come back to these when we have notation to do so. 
         \end{itemize}
     \end{wideitemize}
 \end{frame}
@@ -100,9 +117,9 @@
         \item We can extend our BLP estimator by matching statistics from consumer surveys.
         \pause
         \begin{enumerate}
-            \item \alert<2>{$\overline{v}_1$}: Mean income of cereal purchasers.
+            \item \alert<2>{$\overline{v}_1$}: Mean income of cereal purchasers. Matched to the model's prediction $v_1(\theta)$.
             \pause
-            \item \alert<3>{$\overline{v}_2$}: Share of cereal purchasers who chose a mushy cereal and would choose another mushy cereal if their first choice wasn't available.
+            \item \alert<3>{$\overline{v}_2$}: Share of cereal purchasers who chose a mushy cereal and would choose another mushy cereal if their first choice wasn't available. Model analogue is $v_2(\theta)$.
         \end{enumerate}
         \pause
         \item Denote the vector of matched statistics by $\alert<4>{\overline{v}} = [\overline{v}_1, \overline{v}_2]'$.
