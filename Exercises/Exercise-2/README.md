@@ -114,17 +114,17 @@ Re-run the price counterfactual and discuss new differences. Do substitution and
 
 These questions will not be directly covered in lecture, but will be useful to think about when doing BLP-style estimation in your own work.
 
-### 1. Use different numbers of Monte Carlo draws
+### 1. Try using different numbers of Monte Carlo draws
 
 Above, you took $I_t = 1,000$ draws per market when constructing your agent data. Particularly for simple models like this, this is usually a sufficient number of draws. In practice, however, when there are many more markets and dimensions of heterogeneity, you may want to start with a smaller number like $I_t = 100$ to get started, and then increase this number until your estimates stop changing and optimization stops having any issues. Try re-estimating the model with 10, 100, 500, and 2,000 draws, and see how your estimates change, if at all.
 
-### 2. Use scrambled Halton sequences
+### 2. Try using scrambled Halton sequences
 
 Using a random number generator like [`np.random.default_rng`](https://numpy.org/doc/stable/reference/random/generator.html) is perhaps the simplest approach to approximate an integral over a distribution like standard normals. However, using quasi-Monte Carlo sequences can do better with fewer draws. Instead of using $N(0, 1)$ draws from a random number generator, try using scrambled Halton draws.
 
 You can do so with [`scipy.stats.qmc.Halton`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.qmc.Halton.html) or [`pyblp.build_integration`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.build_integration.html#pyblp.build_integration) with `specification='halton'` in [`pyblp.Integration`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Integration.html). Again, estimate the model with 10, 100, 500, 1,000, and 2,000 quasi-Halton numbers per market, and see how the stability of your estimates compares to when you use simple Monte Carlo draws.
 
-### 3. Use quadrature
+### 3. Try using quadrature
 
 A particularly computationally-efficient approach to approximating a Gaussian distribution is with [quadrature](https://en.wikipedia.org/wiki/Gaussian_quadrature). If you're working with a model where consumer preference heterogeneity is not particularly complicated, you may want to try to replace Monte Carlo or quasi-Monte Carlo draws with many fewer nodes/weights that very well approximate the distribution.
 
@@ -132,26 +132,38 @@ You can construct quadrature nodes and weights with  [`pyblp.build_integration`]
 
 In our setting, we are only using one set of $N(0, 1)$ draws for unobserved preference heterogenity for price. We can use `specification='product'`, `size=7`, and `dimensions=2` to construct two $N(0, 1)$ draws, the second of which we'll want to convert into income draws. We can do this by estimating a lognormal distribution for income in each market (you'll need to compute market-specific means and standard deviations of log income), and transforming the second column of $N(0, 1)$ draws into log income draws. Try doing this and see if your estimates (and compute time) differs much from before. If they do, this indicates that a lognormal distribution for income may not be a great parametric assumption, and a Monte Carlo approach may have made more sense than quadrature.
 
-### 4. Incorporate supply-side restrictions into estimation
+### 4. Approximate the optimal instruments
 
-In the supplemental exercises of the first exercise, we used a canonical assumption about how firms set prices to impute marginal costs of producing each cereal from pricing optimality conditions. If we are further willing to model the functional form of marginal costs, for example as $c_{jt} = x_{jt}'\gamma + \omega_{jt}$, we can stack our current moment conditions $E[\xi_{jt} z_{jt}^D]$ with additional supply-side moment conditions $E[\omega_{jt} z_{jt}^S]$. These will allow us to identify $\gamma$, and can also help to add precision to our demand-side estimates. Intuitively, more information about marginal costs gives us more information about firms' markups, which depend on price elasticities and hence the different parameters that govern the demand side of the model.
+After estimating your model, let PyBLP approximate the optimal instruments with [`.compute_optimal_instruments`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.compute_optimal_instruments.html). You can then use the method [`.to_problem`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.OptimalInstrumentResults.to_problem.html) to automatically update your problem to include the optimal instruments. Then you can re-solve it like before. Do your estimates change much? If they don't what does this suggest?
+
+### 5. Add another instrument and compute the optimal weighting matrix
+
+So far, we have been working with just-identified models with exactly as many moments as parameters. This means that in theory, the weighting matrix $W$ shouldn't matter because we should always be able to find parameter values that set the objective exactly equal to zero, regardless of how the different components of the objective are weighted.
+
+But in some cases, you may want to have an over-identified model. Multiple instruments can increase the precision of estimates, and can also allow for overidentification tests. Try adding an additional instrument `demand_instruments4` equal to the interaction between the log income *standard deviation* and your differentiation instrument constructed from `predicted_prices`. Recall the linear regression intuition: this leverages cross-market variation in the standard deviation of income to target the parameter in $\Pi$ on prices and log income.
+
+First re-estimate the first step of your model. At the optimum, your objetive will now be nontrivially far from zero, but you should still verify that the other convergence checks pan out. Do your first-stage estimates look any different?
+
+Then re-run estimation but pass [`.updated_W`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.html#pyblp.ProblemResults.updated_W) to the `W` argument of [`.solve`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Problem.solve.html). You should still be using `method='1s'`. Technically, PyBLP will do the two steps for you with `method='2s'`. However, if this was a real problem and not just an exercise, you would want to again try optimization with multiple starting values, which is something that PyBLP doesn't automatically do.
+
+Compare you first and second-stage estimates. Do they look particularly different? What about your standard errors?
+
+### 6. Incorporate supply-side restrictions into estimation
+
+In the supplemental exercises of the first exercise, we used a canonical assumption about how firms set prices to impute marginal costs of producing each cereal from pricing optimality conditions. If we are further willing to model the functional form of marginal costs, for example as $c_{jt} = x_{jt}'\gamma + \omega_{jt}$, we can stack our current moment conditions $E[\xi_{jt} z_{jt}^D]$ with additional supply-side moment conditions $E[\omega_{jt} z_{jt}^S]$. These will allow us to efficiently estimate $\gamma$, and in some cases can also help to add precision to our demand-side estimates.
 
 Like the the first exercise, you will need a column of `firm_ids` to tell PyBLP which firms produce what cereals. To impose the assumption that $c_{jt} = x_{jt}'\gamma + \omega_{jt}$ for some characteristics $x_{jt}$, you'll need to specify a third formulation in your `product_formulations` tuple. For simplicity, try assuming that the only observed characterstics that affect marginal costs are a constant and the `mushy` dummy.
 
 ```python
 product_formulations = (
     pyblp.Formulation('0 + prices', absorb='C(market_ids) + C(product_ids)'), 
-    pyblp.Formulation('0 + mushy'), 
+    pyblp.Formulation('0 + mushy + prices'), 
     pyblp.Formulation('1 + mushy'),
 )
 ```
 
 By default, PyBLP knows that a constant and `mushy` are exogenous variables, so it will add them to the set of supply-side instruments $z_{jt}^S$. If you wanted to model non-constant returns to scale, for example by including `I(market_size * shares)` to have a coefficient on quantities $q_{jt} = M_t \cdot s_{jt}$, PyBLP would recognize that this term included endogenous market shares and not include it in $z_{jt}^S$. Instead, you would have to specify a `supply_instruments0` column in your product data to give a valid demand-shifter for market shares. Ideally, you would want something that affects demand but that is uncorrelated with the unobserved portion of marginal costs $\omega_{jt}$.
 
-Try estimating the model with supply-side restrictions. How do your estimates change? Try adding product or market fixed effects to the supply-side configuration.
+Try estimating the model with supply-side restrictions. When calling [`.solve`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Problem.solve.html), you'll need to specify an initial value for $\alpha$ with the `beta` argument because after adding a supply side, we can no longer "concentrate out" $\alpha$ as it's needed to impute marginal costs. PyBLP will automatically concentrate out $\gamma$.
 
-### 5. Approximate the optimal instruments and weights
-
-After estimating your model, let PyBLP approximate the optimal instruments with [`.compute_optimal_instruments`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.compute_optimal_instruments.html). You can then use the method [`.to_problem`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.OptimalInstrumentResults.to_problem.html) to automatically update your problem to include the optimal instruments. 
-
-If you include a supply side, you will have more optimal instruments than parameters, so your mode. will be over identified. This means that your objective will not necessarily be close to zero at the optimum, and the GMM weighting matrix $W$ will matter for statistical efficiency. When calling [`.solve`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Problem.solve.html) on your updated problem, set `sigma` and `pi` equal to your first-stage estimates [`.sigma`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.html#pyblp.ProblemResults.sigma) and [`.pi`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.html#pyblp.ProblemResults.pi), and `optimization=pyblp.Optimization('return')` to get an estimate [`.updated_W`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.ProblemResults.html#pyblp.ProblemResults.updated_W) of the optimal weighting matrix for your new optimal instruments. Pass this to the `W` argument of [`.solve`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Problem.solve.html) in your updated problem to use both the optimal instruments and the optimal weighting matrix for a second GMM step.
+Interpret your new supply-side estimates. Your demand-side estimates should be essentially the same because you're using the same moments to estimate them as before. When adding a supply side, demand-side estimates tend to become more precise when there are supply-side instruments that are relevant for demand-side parameters (e.g., optimal instruments).
