@@ -14,7 +14,7 @@
     \end{minipage}
      \vspace{-0.5\baselineskip}
     \begin{wideitemize}
-        \item On day 2, we added preference heterogeneity $\mu_{ijt}$ to improve substitution patterns.
+        \item On day 2, adding preference heterogeneity $\mu_{ijt}$ gave more realistic substitution patterns.
         \pause
         \begin{itemize}
             \item Most common form is $\mu_{ijt} = x_{jt}'(\Sigma\nu_{it} + \Pi y_{it})$ for $\nu_{it} \sim N(0, I)$ and $y_{it}$ from census data.
@@ -176,16 +176,16 @@
     \begin{wideitemize}
         \item Each micro statistic $f_m(\overline{v})$ is a summary statistic computed on a micro dataset.
         \pause
-        \item Micro datasets $d \in \mathcal{D}$ consist of surveyed consumers $n \in \mathcal{N}_d$.
+        \item Micro datasets $d \in \mathcal{D}$ consist of surveyed consumers $n \in \mathcal{N}_d$ who could ...
         \pause
         \begin{enumerate}
-            \item Could be from each market $t_n \in \mathcal{T}$ with equal probability.
+            \item ... be from each market $t_n \in \mathcal{T}$ with equal probability.
             \pause
-            \item Of type $i_n \in \mathcal{I}_{t_n}$ with probability $w_{i_nt_n}$. Same individual type weight as before.
+            \item ... be of type $i_n \in \mathcal{I}_{t_n}$ with probability $w_{i_nt_n}$. Same individual type weight as before.
             \pause
-            \item Chooses $j_n \in \mathcal{J}_{t_n} \cup \{0\}$ with probability $s_{i_nj_nt_n}$. Same logit choice probability as before.
+            \item ... choose $j_n \in \mathcal{J}_{t_n} \cup \{0\}$ with probability $s_{i_nj_nt_n}$. Same logit choice probability as before.
             \pause
-            \item Selected to be in the survey with known probability $w_{di_nj_nt_n}$. Often \alert{choice-based}.
+            \item ... be selected into the survey with known probability $w_{di_nj_nt_n}$. Often \alert{choice-based}.
         \end{enumerate}
         \pause
         \item Micro statistics $f_m(\overline{v})$ are smooth functions of $p = 1, \dots, P$ ``micro part'' averages:
