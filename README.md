@@ -26,6 +26,8 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 <b>Slides</b>
 
+[Introduction](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf)
+
 [Day 1](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
 
 <b>Exercise</b>
