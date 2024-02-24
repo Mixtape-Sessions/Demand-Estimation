@@ -16,7 +16,7 @@ If you're using Python, you have two broad options for how to do the coding exer
 - Use a [Jupyter Notebook](https://jupyter.org/install#jupyter-notebook). The solutions to each exercise will be in a notebook. In general, notebooks are a good way to weave text and code for short exercises, and to distribute quick snippets of code with others.
 - Use an integrated development environment (IDE). Once you get beyond a few hundred lines of code, I strongly recommend using an IDE and not notebooks. For Python, I recommend [VS Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/). The former is free and the latter has a free community edition with all the features you'll need for standard Python development. Both [integrate well](https://docs.anaconda.com/free/anaconda/ide-tutorials/) with Anaconda.
 
-If using a notebook, you can start with the following notebook file: [notebook.ipynb](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/notebook.ipynb). If using an IDE, you can start with the following script file: [script.py](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/script.py). Both import various packages used throughout the exercise.
+If using a notebook, you can start with the following notebook file: <a id="raw-url" href="https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/notebook.ipynb">notebook.ipynb</a>. If using an IDE, you can start with the following script file: <a id="raw-url" href="https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/script.py">script.py</a>. Both import various packages used throughout the exercise.
 
 ```python
 import pyblp
