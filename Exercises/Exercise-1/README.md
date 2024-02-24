@@ -16,14 +16,18 @@ If you're using Python, you have two broad options for how to do the coding exer
 - Use a [Jupyter Notebook](https://jupyter.org/install#jupyter-notebook). The solutions to each exercise will be in a notebook. In general, notebooks are a good way to weave text and code for short exercises, and to distribute quick snippets of code with others.
 - Use an integrated development environment (IDE). Once you get beyond a few hundred lines of code, I strongly recommend using an IDE and not notebooks. For Python, I recommend [VS Code](https://code.visualstudio.com/) or [PyCharm](https://www.jetbrains.com/pycharm/). The former is free and the latter has a free community edition with all the features you'll need for standard Python development. Both [integrate well](https://docs.anaconda.com/free/anaconda/ide-tutorials/) with Anaconda.
 
-If using a notebook, I recommend adding a code block at the top of your notebook with the following. It imports various packages used throughout the exercise and configures them to reduce the amount of information printed to your screen. If using Python via an IDE, the first few lines are imports that we'll be using today. You can add them to the top of your script for today's exercises.
+If using a notebook, you can start with the following notebook file: [notebook.ipynb](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/notebook.ipynb). If using an IDE, you can start with the following script file: [script.py](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Templates/script.py). Both import various packages used throughout the exercise.
 
 ```python
 import pyblp
 import numpy as np
 import pandas as pd
 import statsmodels.formula.api as smf
+```
 
+The notebook additionally configures these packages to reduce the amount of information printed to the screen.
+
+```python
 pyblp.options.digits = 3
 pyblp.options.verbose = False
 pd.options.display.precision = 3
@@ -32,6 +36,8 @@ pd.options.display.max_columns = 50
 import IPython.display
 IPython.display.display(IPython.display.HTML('<style>pre { white-space: pre !important; }</style>'))
 ```
+
+Finally, both show how to load the data that we'll be using today.
 
 ## Data
 
