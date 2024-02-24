@@ -67,7 +67,7 @@ Second, we need to specify which parameters in $\Sigma$ and $\Pi$ to optimize ov
 
 Before and after you solve the problem, you can set `pyblp.options.verbose = True` and `pyblp.options.verbose = False`. Make sure that the gradient norm (the optimization problem's first-order conditions) is getting iteratively closer to zero. We call this "marching down the gradient" and not seeing it near the end of optimization indicates a problem. Since we have exactly as many parameters as moments/instruments, we're *just identified* and should also have an approximately zero objective at the optimum, so make sure you see that as well. At the optimum, in addition to a near-zero objective and gradient norm, the Hessian (in this case just a single value) should be positive, indicating that the optimization's second-order conditions are satisfied. The other columns outputted in the optimization progress have information about the inner loop, e.g. how many iterations it takes to solve it and how long this takes.
 
-Once you're satisfied that optimization seems to have worked well, interpret the sign of your estimated parameter in $\Pi$. Can you use $\hat{\alpha}$ to interpret it in dollar terms, i.e. how much more a person with 1% higher income is willing to pay for mushyness?
+Once you're satisfied that optimization seems to have worked well, interpret the sign of your estimated parameter in $\Pi$. If you've done all of the above correctly, you should get an estimate of around `0.251`. Can you use $\hat{\alpha}$ to interpret it in dollar terms, i.e. how much more a person with 1% higher income is willing to pay for mushyness?
 
 ### 3. Make sure you get the same estimate with random starting values
 
@@ -102,7 +102,7 @@ pi=[
 ]
 ```
 
-When you solve the problem, there are two more parameters, so it will take a bit longer. As the optimizer nears convergence, we should again see "marching down the gradient" and, since we're still just identified, an objective approaching zero. At the optimum, verify that the gradient norm is again near zero and that the Hessian's eigenvalues are all positive. Usually, we would again draw multiple starting values to be sure everything's working fine, but from here on out, to save time we'll just use one set of starting values.
+When you solve the problem, there are two more parameters, so it will take a bit longer. As the optimizer nears convergence, we should again see "marching down the gradient" and, since we're still just identified, an objective approaching zero. At the optimum, verify that the gradient norm is again near zero and that the Hessian's eigenvalues are all positive. Usually, we would again draw multiple starting values to be sure everything's working fine, but from here on out, to save time we'll just use one set of starting values. Your `sigma` estimate should be around `6.02`.
 
 Note that your new random coefficient on price is $\alpha_{it} = \alpha + \sigma_p \nu_{1it} + \pi_p y_{it}$ where $\nu_{1it}$ is `nodes0` in your `agent_data` and $y_{it}$ is `log_income`. Compute the average log income $\bar{y}$ in your demographic data to verify that your estimate of the *average* price coefficient $\alpha + \sigma_p \times 0 + \pi \times \bar{y}$ is close to your old $\hat{\alpha}$. Using this average price sensitivity, interpret the two new parameters. Does price sensitivity vary a lot or a little with income? Compare to heterogeneity induced by income, is there a lot or a little unobserved heterogeneity in price sensitivity?
 

@@ -69,7 +69,7 @@ You can download `products.csv` from [this link](https://github.com/Mixtape-Sess
 
 To transform observed quantities $q_{jt}$ into market shares $s_{jt} = q_{jt} / M_t$, we first need to define a market size $M_t$. We'll assume that the potential number of servings sold in a market is the city's total population multiplied by 90 days in the quarter. Create [a new column](https://pandas.pydata.org/docs/getting_started/intro_tutorials/05_add_columns.html) called `market_size` equal to `city_population` times `90`. Note that this assumption is somewhat reasonable but also somewhat arbitrary. Perhaps a sizable portion of the population in a city would never even consider purchasing cereal. Or perhaps those who do tend to want more than one serving per day. In the third exercise, we'll think more about how to discipline our market size assumption with data.
 
-Next, compute a new column `market_share` equal to `servings_sold` divided by `market_size`. This gives our market shares $s_{jt}$. We'll also need the outside share $s_{0t} = 1 - \sum_{j \in J_t} s_{jt}$. Create a new column `outside_share` equal to this expression. You can use [`.groupby`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html) to group by market and [`.transform('sum')`](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.transform.html) to compute the within-market sum of inside shares. Compute summary statistics for your inside and outside shares.
+Next, compute a new column `market_share` equal to `servings_sold` divided by `market_size`. This gives our market shares $s_{jt}$. We'll also need the outside share $s_{0t} = 1 - \sum_{j \in J_t} s_{jt}$. Create a new column `outside_share` equal to this expression. You can use [`.groupby`](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html) to group by market and [`.transform('sum')`](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.transform.html) to compute the within-market sum of inside shares. Compute summary statistics for your inside and outside shares. If you computed market shares correctly, the smallest outside share should be $s_{0t} \approx 0.305$ and the largest should be $s_{0t} \approx 0.815$.
 
 ### 3. Estimate the pure logit model with OLS
 
@@ -77,7 +77,7 @@ Recall the pure logit estimating equation: $\log(s_{jt} / s_{0t}) = \delta_{jt} 
 
 Then, use the package of your choice to run an OLS regression of `logit_delta` on a constant, `mushy`, and `price_per_serving`. There are many packages for running OLS regressions in Python. One option is to use the [formula interface for `statsmodels`](https://www.statsmodels.org/stable/example_formulas.html#ols-regression-using-formulas). To use robust standard errors, you can specify `cov_type='HC0'` in [`OLS.fit`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.fit.html).
 
-Interpret your estimates. In particular, can you re-express your estimate on `mushy` in terms of how much consumers are willing to pay for `mushy`, using your estimated price coefficient?
+Interpret your estimates. Your coefficient on `price_per_serving` should be around `-7.48`. In particular, can you re-express your estimate on `mushy` in terms of how much consumers are willing to pay for `mushy`, using your estimated price coefficient?
 
 ### 4. Run the same regression with PyBLP
 
@@ -116,7 +116,7 @@ The simplest way to add fixed effects is as dummy variables. We won't do this to
 
 The alternative, which we'll do today, is to "absorb" the fixed effects. For a single fixed effect, we could just de-mean our outcome variable and each of our regressors within the fixed effects levels, and then run our regression. For multiple fixed effects, we need to *iteratively* de-mean. PyBLP does this automatically if you specify `absorb='C(market_ids) + C(product_ids)'` in your formulation instead of adding these as dummy variables.
 
-Since `mushy` is always either 1 or 0 for the same product across different markets, it's collinear with product fixed effects, and you can drop it from your formula. Similarly, you can drop the constant. After dropping these, re-create your problem with absorbed fixed effects and re-solve it. Compare the new $\hat{\alpha}$ estimate with the last one. Does its change suggest that price was positively or negatively correlated with unobserved product-level/market-level quality?
+Since `mushy` is always either 1 or 0 for the same product across different markets, it's collinear with product fixed effects, and you can drop it from your formula. Similarly, you can drop the constant. After dropping these, re-create your problem with absorbed fixed effects and re-solve it. Compare the new $\hat{\alpha}$ estimate with the last one. You should now be getting a coefficient on price of around `-28.6`. Does its change suggest that price was positively or negatively correlated with unobserved product-level/market-level quality?
 
 ### 6. Add an instrument for price
 
@@ -124,7 +124,7 @@ Adding market and product fixed effects can be helpful, but since unobserved qua
 
 Before using it, we should first run a first-stage regression to make sure that it's a relevant instrument for price. To do so, use the same package you used above to run an OLS regression to run a second OLS regression of prices on `price_instrument` and your market and product fixed effects. If using the [formula interface for `statsmodels`](https://www.statsmodels.org/stable/example_formulas.html#ols-regression-using-formulas), you can use the same fixed effect shorthand as in PyBLP, with your full formula looking like `prices ~ price_instrument + C(market_ids) + C(product_ids)`. Does `price_instrument` seem like a relevant instrument for `prices`?
 
-Now that we've checked relevance, we can set our `demand_instruments0` column equal to `price_instrument`, re-create the problem, and re-solve it. Does the change in $\hat{\alpha}$ suggest that price was positively or negatively correlated with $\Delta\xi_{jt}$ in $\xi_{jt} = \xi_j + \xi_t + \Delta\xi_{jt}$?
+Now that we've checked relevance, we can set our `demand_instruments0` column equal to `price_instrument`, re-create the problem, and re-solve it. You should get a new coefficient on price of around `-30.6`. Does the change in $\hat{\alpha}$ suggest that price was positively or negatively correlated with $\Delta\xi_{jt}$ in $\xi_{jt} = \xi_j + \xi_t + \Delta\xi_{jt}$?
 
 ### 7. Cut a price in half and see what happens
 

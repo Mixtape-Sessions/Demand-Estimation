@@ -53,7 +53,7 @@ Finally, define a [`pyblp.MicroMoment`](https://pyblp.readthedocs.io/en/stable/_
 
 Given our micro moment, say `income_moment`, we can just pass a list with it as the only element to `micro_moments=[income_moment]` in [`.solve`](https://pyblp.readthedocs.io/en/stable/_api/pyblp.Problem.solve.html). Since our `X2` configuration has an additional column for the constant, our `sigma` matrix needs another column/row, and our `pi` matrix needs another row. Set the new elements in both equal to zeros, except for the one in $\Pi$ corresponding to the interaction between the new constant in `X2` and log income, which you can set to some nonzero initial value, say `1`. In practice, you'll want to try out multiple random starting values.
 
-Again, we're just identified, so we should get an approximately zero objective at the optimum. If we saw "marching down the gradient" and have a near-zero gradient norm and positive Hessian eigenvalues at the optimum, we can look at our estimates. Does the new parameter estimate suggest that the original assumption of it being zero was fairly okay, or not?
+Again, we're just identified, so we should get an approximately zero objective at the optimum. If we saw "marching down the gradient" and have a near-zero gradient norm and positive Hessian eigenvalues at the optimum, we can look at our estimates. You should get a new parameter estimate of around `-0.331`. Does the new parameter estimate suggest that the original assumption of it being zero was fairly okay, or not?
 
 ### 2. Use the diversion statistics to estimate unobserved preference heterogeneity for a constant and mushy
 
