@@ -369,8 +369,8 @@
         \pause
         \item This makes your estimation strategy clear, and makes optimization easier.
         \begin{itemize}
-            \item \textit{Just-identified} models give $Q(\hat{\theta}) \approx 0$ at the optimum.
-            \item This is regardless of your weighting matrix $W$, so you don't need 2-step GMM.
+            \item \textit{Just-identified} models typically give $Q(\hat{\theta}) \approx 0$ at the optimum.
+            \item This is regardless of your weighting matrix $W$, so you typically don't need 2-step GMM.
         \end{itemize}
         \pause
         \item Later, adding more can help with weakness and testing exclusion restrictions. 
@@ -405,7 +405,7 @@
     \vspace{-1\baselineskip}
     \begin{minipage}[c][4\baselineskip][c]{\textwidth}
         \begin{equation*}
-            \log\frac{s_{jt}}{s_{0t}} \approx \alert<2>{\beta x_{jt}} \only<3->{+ \alert<3-6>{\sigma^2 d_{jt}^x} \only<7->{+ \alert<7>{\pi m_t^y x_{jt}} + \alert<8>{\pi^2 v_t^y d_{jt}^x}}} + \xi_{jt} \only<3->{\quad\text{where}\quad d_{jt}^x = \Big(\frac{x_{jt}}{2} - \sum_{k \in \mathcal{J}_t} s_{kt} x_{kt}\Big) x_{jt}}
+            \log\frac{s_{jt}}{s_{0t}} \alt<3->{\approx}{=} \alert<2>{\beta x_{jt}} \only<3->{+ \alert<3-6>{\sigma^2 d_{jt}^x} \only<7->{+ \alert<7>{\pi m_t^y x_{jt}} + \alert<8>{\pi^2 v_t^y d_{jt}^x}}} + \xi_{jt} \only<3->{\quad\text{where}\quad d_{jt}^x = \Big(\frac{x_{jt}}{2} - \sum_{k \in \mathcal{J}_t} s_{kt} x_{kt}\Big) x_{jt}}
         \end{equation*}
     \end{minipage}
     \vspace{-0.5\baselineskip}
@@ -418,7 +418,7 @@
             \end{itemize}
         }
         \pause
-        \item To target $\sigma$, need a measure of how ``differentiated'' $j$ is in terms of $x_{jt}$ within $t$.
+        \item To target $\sigma \neq 0$, need a measure of how ``differentiated'' $j$ is in terms of $x_{jt}$ within $t$.
         \only<3-6>{
             \begin{itemize}
                 \item Can't use $d_{jt}^x$ itself because it depends on endogenous market shares $s_{kt}$.
@@ -431,7 +431,7 @@
             \end{itemize}
         }
         \pause
-        \item To target $\pi$, we can interact $x_{jt}$ with mean within-market income $m_t^y$.
+        \item To target $\pi \neq 0$, we can interact $x_{jt}$ with mean within-market income $m_t^y$.
         \only<7-8>{
             \begin{itemize}
                 \item We want \alert{cross-market demographic variation}, otherwise $m_t^y x_{jt}$ is collinear with $x_{jt}$.
