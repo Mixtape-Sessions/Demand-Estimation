@@ -34,7 +34,7 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 [Exercise 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/README.md)
 
-<!--- [Solutions 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb) --->
+[Solutions 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb)
 
 </details>
 
