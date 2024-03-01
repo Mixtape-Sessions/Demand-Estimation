@@ -164,10 +164,10 @@
             \item Their model analogues $f(v(\theta)) = [f_1(v(\theta)), \dots, f_M(v(\theta))]'$.
         \end{enumerate}
         \pause
-        \item Statistically, we need $f(\overline{v}) \to f(v(\theta))$ as the micro dataset expands.
+        \item Statistically, we need $f(\overline{v}) \to f(v(\theta_0))$ as the micro dataset expands.
         \begin{itemize}
             \item This gives what we'll call $m = 1, \dots, M$ different ``\alert{micro moments}.''
-            \item Quite different from our ``aggregate moments'' $\E[\xi_{jt} \cdot z_{jt}] = 0$.
+            \item A bit different from our ``aggregate moments'' $\E[\xi_{jt} \cdot z_{jt}] = 0$.
         \end{itemize}
     \end{wideitemize}
 \end{frame}
@@ -204,7 +204,7 @@
         \pause
         \item First, you need to define your \alert{micro dataset} $d$.
         \begin{itemize}
-            \item Sampling weights $w_{dijt} = 1\{j \neq 0\}$ mean only cereal purchasers were surveyed.
+            \item Sampling weights $w_{dijt} = 1\{j \neq 0\}$ imply only cereal purchasers were surveyed.
             \item In practice, you specify a function to compute a matrix of weights for each market $t$.
             \item You also need to specify the number of survey observations $N_d = |\mathcal{N}_d|$.
         \end{itemize}
@@ -227,7 +227,7 @@
     \vspace{-\baselineskip}
     \begin{minipage}[c][4\baselineskip][c]{\textwidth}
         \begin{equation*}
-            f_m\alt<1>{(\overline{v}_p)}{\bigg(\frac{1}{N_d} \sum_{n \in \mathcal{N}_d} v_{pi_nj_nt_n}\bigg)} \to f_m\alt<1>{(v_p(\theta))}{\bigg(\frac{\only<2-3>{\cdots} \only<4->{\alert<4>{\sum_{t \in \mathcal{T}}}} \only<4>{\cdots} \only<5->{\alert<5>{\sum_{i \in \mathcal{I}_t}}} \only<6->{\alert<6>{\sum_{j \in \mathcal{J}_t \cup \{0\}}}} \only<5->{\alert<5>{w_{it}}} \only<5>{\cdots} \only<6->{\cdot \alert<6>{s_{ijt}(\theta)}} \only<6>{\cdots} \only<7->{\cdot \alert<7>{w_{dijt}} \cdot} \alert<2>{v_{pijt}}}{\only<2-3>{\cdots} \only<4->{\alert<4>{\sum_{t \in \mathcal{T}}}} \only<4>{\cdots} \only<5->{\alert<5>{\sum_{i \in \mathcal{I}_t}}} \only<6->{\alert<6>{\sum_{j \in \mathcal{J}_t \cup \{0\}}}} \only<5->{\alert<5>{w_{it}}} \only<5>{\cdots} \only<6->{\cdot \alert<6>{s_{ijt}(\theta)}} \only<6>{\cdots} \only<7->{\cdot \alert<7>{w_{dijt}}}}\bigg)}
+            f_m\alt<1>{(\overline{v}_p)}{\bigg(\frac{1}{N_d} \sum_{n \in \mathcal{N}_d} v_{pi_nj_nt_n}\bigg)} \to f_m\alt<1>{(v_p(\theta_0))}{\bigg(\frac{\only<2-3>{\cdots} \only<4->{\alert<4>{\sum_{t \in \mathcal{T}}}} \only<4>{\cdots} \only<5->{\alert<5>{\sum_{i \in \mathcal{I}_t}}} \only<6->{\alert<6>{\sum_{j \in \mathcal{J}_t \cup \{0\}}}} \only<5->{\alert<5>{w_{it}}} \only<5>{\cdots} \only<6->{\cdot \alert<6>{s_{ijt}(\theta_0)}} \only<6>{\cdots} \only<7->{\cdot \alert<7>{w_{dijt}} \cdot} \alert<2>{v_{pijt}}}{\only<2-3>{\cdots} \only<4->{\alert<4>{\sum_{t \in \mathcal{T}}}} \only<4>{\cdots} \only<5->{\alert<5>{\sum_{i \in \mathcal{I}_t}}} \only<6->{\alert<6>{\sum_{j \in \mathcal{J}_t \cup \{0\}}}} \only<5->{\alert<5>{w_{it}}} \only<5>{\cdots} \only<6->{\cdot \alert<6>{s_{ijt}(\theta_0)}} \only<6>{\cdots} \only<7->{\cdot \alert<7>{w_{dijt}}}}\bigg)}
         \end{equation*}
     \end{minipage}
      \vspace{-0.5\baselineskip}
@@ -335,9 +335,9 @@
             \item For non-binary $x_{jt}$, can also match ``$\Cov(x_{jt}, x_{kt} \mid j, k \neq 0)$'' or similar.
         \end{itemize}
         \pause
-        \item To target \alert<3>{$\sigma_1$}, want a measure of how much people substitute to $j = 0$.
+        \item To target \alert<3>{$\sigma_1$}, want a measure of how much people substitute to $k = 0$.
         \begin{itemize}
-            \item In your exercise, you'll match another share ``$\Pr(j = 0 \mid j \neq 0)$.''
+            \item In your exercise, you'll match another share ``$\Pr(k = 0 \mid j \neq 0)$.''
         \end{itemize}
         \pause
         \item \alert{Diversion ratios} straightforward to interpret and collect.
@@ -400,9 +400,13 @@
         \begin{equation*}
             \log\mathcal{L}(\theta, \delta) = \sum_{n \in \mathcal{N}_d} \Pr(t_n, \, j_n, \, k_n, \, y_{i_nt_n} \mid n \in \mathcal{N}_d; \theta, \delta)
         \end{equation*}
+        \vspace{-1em}
+        \pause
         \item This classic approach proceeds into two steps:
+        \pause
         \begin{enumerate}
             \item Find the $\hat{\theta} = (\hat{\Sigma}, \hat{\Pi})$ and mean utilities $\hat{\delta}$ that maximize $\log\mathcal{L}(\theta, \delta)$.
+            \pause
             \item Run an IV regression of $\hat{\delta}_{jt}$ on $x_{jt}$ to recover linear parameters $\hat{\beta}$ like in day 1.
         \end{enumerate}
         \pause
@@ -452,7 +456,7 @@
             \item Estimating a nesting parameter.
         \end{itemize}
         \pause
-        \item We'll post solutions to all the exercises, including supplemental ones.
+        \item I'll post the remaining solutions today after questions.
     \end{wideitemize}
 \end{frame}
 
