@@ -1,6 +1,5 @@
 <img src="https://raw.githubusercontent.com/Mixtape-Sessions/Demand-Estimation/main/img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
 
-
 ## About
 
 This three-day workshop covers the Berry-Levinsohn-Pakes (BLP) approach to estimating the statistical relationship between product sales and product characteristics such as prices. As the foundational approach for differentiated products demand estimation in the industrial organization literature, BLP is used by academics, antitrust regulators, and industry professionals to shed light on difficult questions.
@@ -16,8 +15,6 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 ### Day 1
 
-#### Topics
-
 - History and motivation for BLP (by Ariel Pakes).
 - The BLP model.
 - Pure logit estimation.
@@ -26,23 +23,20 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Introduction](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf)
+[Introduction](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf)
 
-[Day 1](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
+[Day 1](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
 
 #### Exercise
 
 [Exercise 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/README.md)
 
-[Solutions 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb)
-
-
-
+[Solutions to Exercise 1](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb) 
+  
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-1/Solutions.ipynb)
 
 
 ### Day 2
-
-#### Topics
 
 - Preference heterogeneity.
 - Mixed logit estimation.
@@ -52,21 +46,18 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Day 2](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
+[Day 2](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
 
 #### Exercise
 
 [Exercise 2](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/README.md)
 
-[Solutions 2](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/Solutions.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/Solutions.ipynb)
+[Solutions to Exercise 2](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/Solutions.ipynb) 
 
-
-
+[![Open  in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-2/Solutions.ipynb)
 
 
 ### Day 3
-
-#### Topics
 
 - Micro BLP estimation.
 - Choosing micro moments.
@@ -75,13 +66,15 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Day 3](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
+[Day 3](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
 
 #### Exercise
 
 [Exercise 3](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/README.md)
 
-[Solutions 3](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/Solutions.ipynb) [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/Solutions.ipynb)
+[Solutions to Exercise 3](https://github.com/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/Solutions.ipynb) 
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Mixtape-Sessions/Demand-Estimation/blob/main/Exercises/Exercise-3/Solutions.ipynb)
 
 
 
@@ -89,13 +82,13 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 ### Modern Guides
 
-- [Berry and Haile (2021)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
-- [Conlon and Gortmaker (2020)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
-- [Conlon and Gortmaker (2023)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2023.pdf)
+- [Berry and Haile (2021)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
+- [Conlon and Gortmaker (2020)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
+- [Conlon and Gortmaker (2023)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2023.pdf)
 
 ### Foundational Guides
 
-- [Berry, Levinsohn, and Pakes (1995)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf)
-- [Nevo (2000)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf)
-- [Petrin (2002)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf)
-- [Berry, Levinsohn, and Pakes (2004)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf)
+- [Berry, Levinsohn, and Pakes (1995)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf)
+- [Nevo (2000)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf)
+- [Petrin (2002)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf)
+- [Berry, Levinsohn, and Pakes (2004)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf)

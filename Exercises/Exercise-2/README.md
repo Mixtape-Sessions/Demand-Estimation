@@ -8,7 +8,7 @@ We'll be continuing where we left off after the [first exercise](https://github.
 
 ## Data
 
-Today, you'll incorporate [`demographics.csv`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Data/demographics.csv) into estimation, which again is a simplified version of [Nevo's (2000)](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf) demographic data with less information and fewer derived columns. The data were originally draws from the Current Population Survey.
+Today, you'll incorporate [`demographics.csv`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Exercises/Data/demographics.csv) into estimation, which again is a simplified version of [Nevo's (2000)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf) demographic data with less information and fewer derived columns. The data were originally draws from the Current Population Survey.
 
 In your own work, when incorporating demographic data into estimation, you will want to sample from the whole Current Population Survey (or whatever survey/census data you are using), not just from a subset of it. The small size of today's demographic data helps with distributing the data, but in practice you should ideally be sampling from a much larger dataset of demographic information. In your own work you will also want to incorporate more demographic variables than the one included in this dataset. Like the product data, in these exercises we only consider a few columns to keep the exercises a manageable length.
 
