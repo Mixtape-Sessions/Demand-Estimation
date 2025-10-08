@@ -23,9 +23,9 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Introduction](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf)
+[Introduction](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/0-Introduction.pdf)
 
-[Day 1](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
+[Day 1](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/1-Pure-Logit.pdf)
 
 #### Exercise
 
@@ -46,7 +46,7 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Day 2](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
+[Day 2](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/2-Mixed-Logit.pdf)
 
 #### Exercise
 
@@ -66,7 +66,7 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 #### Slides
 
-[Day 3](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
+[Day 3](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Slides/3-Micro-Data.pdf)
 
 #### Exercise
 
@@ -82,13 +82,13 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 ### Modern Guides
 
-- [Berry and Haile (2021)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
-- [Conlon and Gortmaker (2020)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
-- [Conlon and Gortmaker (2025)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2025.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2025.pdf)
+- [Berry and Haile (2021)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
+- [Conlon and Gortmaker (2020)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
+- [Conlon and Gortmaker (2025)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2025.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2025.pdf)
 
 ### Foundational Guides
 
-- [Berry, Levinsohn, and Pakes (1995)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf)
-- [Nevo (2000)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf)
-- [Petrin (2002)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf)
-- [Berry, Levinsohn, and Pakes (2004)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf) [`📥 Download`](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf)
+- [Berry, Levinsohn, and Pakes (1995)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/4-Berry-Levinsohn-Pakes-1995.pdf)
+- [Nevo (2000)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/5-Nevo-2000.pdf)
+- [Petrin (2002)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/6-Petrin-2002.pdf)
+- [Berry, Levinsohn, and Pakes (2004)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf) [📥](https://github.com/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/7-Berry-Levinsohn-Pakes-2004.pdf)
