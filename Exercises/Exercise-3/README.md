@@ -25,7 +25,7 @@ In today's exercise, we will match these three statistics to introduce some addi
 
 In the last exercise, we were unable to estimate a parameter on log income $y_{it}$ alone because market fixed effects eliminate needed cross-market income variation. Instead, we simply assumed that this parameter is zero, i.e. that income does not shift individuals' preference for cereal in general one way or another. Today, we'll incorporate a micro moment $\mathbb{E}[y_{it} | j > 0] = 7.9$ to estimate this parameter and see whether this assumption was reasonable.
 
-To do so, we'll need first re-create our problem with a constant in our formulation for `X2`. This is because the parameter we want to add will be on the interaction between a constant from the product data and log income in the agent data. Your `X2` formulation should now be `1 + mushy + prices`.
+To do so, we'll first need to re-create our problem with a constant in our formulation for `X2`. This is because the parameter we want to add will be on the interaction between a constant from the product data and log income in the agent data. Your `X2` formulation should now be `1 + mushy + prices`.
 
 After re-initializing our problem with the extra constant, we need to configure our micro moment. To do so, you'll have to configure three objects in the following order.
 
