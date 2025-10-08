@@ -84,7 +84,7 @@ This is one of our advanced courses. These courses are designed <strong>assuming
 
 - [Berry and Haile (2021)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/1-Berry-Haile-2021.pdf)
 - [Conlon and Gortmaker (2020)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/2-Conlon-Gortmaker-2020.pdf)
-- [Conlon and Gortmaker (2023)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2023.pdf)
+- [Conlon and Gortmaker (2025)](https://nbviewer.org/github/Mixtape-Sessions/Demand-Estimation/raw/main/Readings/3-Conlon-Gortmaker-2025.pdf)
 
 ### Foundational Guides
 

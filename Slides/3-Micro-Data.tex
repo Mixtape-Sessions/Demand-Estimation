@@ -140,7 +140,7 @@
             \begin{wideitemize}
                 \item First popularized by \\ \cite{petrin2002quantifying} and\defcitealias{berry2004differentiated}{BLP (2004)}\citetalias{berry2004differentiated}.
                 \visible<2->{\item Used a lot. But each paper has different notation.}
-                \visible<3>{\item We'll use the standardized framework for PyBLP from \citet{conlon2023incorporating}.}
+                \visible<3>{\item We'll use the standardized framework for PyBLP from \citet{conlon2025incorporating}.}
             \end{wideitemize}
         \end{column}
          \begin{column}{0.63\textwidth}
@@ -363,7 +363,7 @@
         \begin{itemize}
             \item If $\hat{\sigma}_1$ is large, many people will dislike all inside goods and usually choose $j = 0$.
             \item This reduces the \textit{effective} market size, helping to compensate for a too-large $M_t$.
-            \item See \cite{zhang2023identification} for more on how $\sigma_1$ can help and other solutions.
+            \item See \cite{zhang2024identification} for more on how $\sigma_1$ can help and other solutions.
         \end{itemize}
     \end{wideitemize}
 \end{frame}
@@ -410,7 +410,7 @@
             \item Run an IV regression of $\hat{\delta}_{jt}$ on $x_{jt}$ to recover linear parameters $\hat{\beta}$ like in day 1.
         \end{enumerate}
         \pause
-        \item For a modern take on this ``MLE'' approach, see \cite*{grieco2022conformant}.
+        \item For a modern take on this ``MLE'' approach, see \cite*{grieco2025optimal}.
         \begin{itemize}
             \item Combine 1, 2, and the likelihood for aggregate market shares into a single objective.
             \item Their Julia package\defcitealias{grumps}{Grumps.jl}\citetalias{grumps} efficiently handles the high-dimensional $\delta = \{\delta_{jt}\}_{j,t}$.
@@ -426,7 +426,7 @@
         \end{equation*}
         \vspace{-\baselineskip}
         \pause
-        \item These use all the information in a micro dataset \citep{conlon2023incorporating}.
+        \item These use all the information in a micro dataset \citep{conlon2025incorporating}.
         \begin{itemize}
             \item Intuition for statistical efficiency here is just that MLE is efficient.
         \end{itemize}
