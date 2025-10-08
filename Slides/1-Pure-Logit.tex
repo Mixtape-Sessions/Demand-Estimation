@@ -6,7 +6,7 @@
 
 \begin{frame}{Who Am I?}
     \begin{wideitemize}
-        \item A fifth-year Economics PhD candidate at Harvard University.
+        \item Princeton postdoc $\to$ NYU Stern Assistant Professor of Economics next year.
         \pause
         \item Making BLP-style estimation more accessible to researchers.
         \begin{itemize}
@@ -28,7 +28,7 @@
         \pause
         \item Ask questions in the Discord chat!
         \begin{itemize}
-            \item I might not be able to answer all them in real time, but I'll stick around after.
+            \item I might not be able to answer all of them in real time, but I'll stick around after.
         \end{itemize}
         \pause
         \item Three coding exercises, one after each day.
@@ -71,7 +71,7 @@
         \pause
         \item Typically used for \alert{counterfactual analysis} of something that hasn't happened.
         \begin{itemize}
-            \item Need a structural model when we can't just estimate a treatment effect.
+            \item Need a model when we can't just estimate a treatment effect.
         \end{itemize}
         \pause
         \item Running example: \alert{What if we halved an important product's price?}
@@ -94,7 +94,7 @@
         \pause
         \item Choices are made in \alert{markets} denoted by $t \in \mathcal{T}$.
         \begin{itemize}
-            \item Time periods, geographic regions, etc.
+            \item Time periods, geographic regions, period-region pairs, etc.
         \end{itemize}
         \pause
         \item Each market has \alert{individuals} with types denoted by $i \in \mathcal{I}_t$.
@@ -113,16 +113,16 @@
 \begin{frame}{Utility Maximization}
     \vspace{-1.25\baselineskip}
     \begin{equation*}
-        \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} \only<2->{= \alert<3>{\delta_{jt}} + \alert<4>{\mu_{ijt}} + \alert<5>{\varepsilon_{ijt}}}
+        \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} \visible<2->{= \alert<3>{\delta_{jt}} + \alert<4>{\mu_{ijt}} + \alert<5>{\varepsilon_{ijt}}}
     \end{equation*}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
         \item Individuals choose an alternative to maximize (indirect) utility $u_{ijt}$.
         \begin{itemize}
-            \item We will specify a function for $u_{ijt}$ and use revealed preference to estimate it.
+            \item We will specify a function for $u_{ijt}$ and use revealed preferences to estimate it.
         \end{itemize}
         \pause
-        \item Will help to decompose utility into three parts.
+        \item It'll help to decompose utility into three parts.
         \pause
         \begin{enumerate}
             \item Mean utility $\alert<3>{\delta_{jt}}$: Average preference across all individuals in the market.
@@ -132,20 +132,20 @@
             \item Idiosyncratic heterogeneity $\alert<5>{\varepsilon_{ijt}}$: Superimposed noise that accommodates estimation.
         \end{enumerate}
         \pause
-        \item We will parameterize $\delta_{jt}$ and $\mu_{ijt}$ and make a convenient assumption about $\varepsilon_{ijt}$.
+        \item We'll parameterize $\delta_{jt}$ and $\mu_{ijt}$ and make a convenient assumption about $\varepsilon_{ijt}$.
     \end{wideitemize}
 \end{frame}
 
 \begin{frame}{Aggregate Market Shares}
-    \vspace{-1.5\baselineskip}
+    \vspace{-1.88\baselineskip}
     \begin{minipage}[c][4\baselineskip][c]{\textwidth}
-        \begin{equation*}
+        \begin{flalign*}
             \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} = \delta_{jt} + \mu_{ijt} + \varepsilon_{ijt} \only<2->{\quad\implies\quad s_{ijt} = \alt<2>{\Pr_{\varepsilon_{it}}\Big(u_{ijt} \geq u_{ikt} \text{ for all } k \in \mathcal{J}_t \cup \{0\}\Big)}{\frac{\exp(\delta_{jt} + \mu_{ijt})}{\sum_{k \in \mathcal{J}_t \cup \{0\}} \exp(\delta_{kt} + \mu_{ikt})}}}
-        \end{equation*}
+        \end{flalign*}
     \end{minipage}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
-        \item Assume a convenient distribution for $\varepsilon_{ijt}$: iid type I extreme value.
+        \item Assume a convenient distribution for $\varepsilon_{ijt}$: i.i.d.\ type I extreme value.
         \pause
         \begin{itemize}
             \item ``Logit shocks'' are convenient because they give multinomial logit choice probabilities $s_{ijt}$.
@@ -174,12 +174,12 @@
             \item Issue here is that we often don't observe the quantity of outside choices $q_{0t}$.
         \end{itemize}
         \pause
-        \item Sometimes the choice of market size is straightforward.
+        \item Sometimes the choice of market size (``potential'' demand) is straightforward.
         \begin{itemize}
             \item Market size for drugs to treat a condition is how many people have that condition.
         \end{itemize}
         \pause
-        \item But typically, the choice of market size is \alert{neither easy nor innocuous}.
+        \item But typically, the choice of market size is \alert{neither clear nor innocuous}.
         \begin{itemize}
             \item E.g.\ how many choices of which cereal to buy are made every day in a specific city?
             \item Population $\times$ max cereals per day? Foot traffic estimate $\times$ max cereals per trip?
@@ -200,10 +200,13 @@
     \end{equation*}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
-        \item We will estimate our utility function with \alert{revealed preference}.
+        \only<2>{\vspace{0.15\baselineskip}}
+        \item We'll estimate our utility function with \alert{revealed preferences}.
+        \only<2>{\vspace{0.13\baselineskip}}
         \begin{itemize}
             \item Holding $\mu_{ijt}$ fixed, a higher quantity $q_{jt} > q_{kt}$ implies a higher mean utility $\delta_{jt} > \delta_{kt}$.
         \end{itemize}
+        \only<2>{\vspace{0.05\baselineskip}}
         \pause
         \item Utility is invariant to positive affine transformations. Need two normalizations.
         \only<2>{
@@ -214,7 +217,7 @@
         }
         \pause
         \begin{enumerate}
-            \item[a.] \alert{Level}: We will normalize $u_{i0t} = \varepsilon_{i0t}$, i.e.\ $\delta_{0t} = \mu_{i0t} = 0$ \\ $\implies$ Estimates are relative to outside option utility.
+            \item[a.] \alert{Level}: We will normalize $u_{i0t} = \varepsilon_{i0t}$, i.e.\ $\delta_{0t} = \mu_{i0t} = 0$ .\\ $\implies$ Estimates are relative to outside option utility.
             \pause
             \item[b.] \alert{Scale}: We already normalized $\Var(\varepsilon_{ijt}) = \pi^2 / 6$ when deriving choice probabilities. \\ $\implies$ Estimates are relative to scale of noise.
         \end{enumerate}
@@ -228,9 +231,9 @@
 \begin{frame}{Pure Logit Model}
     \vspace{-\baselineskip}
     \begin{minipage}[c][4\baselineskip][c]{\textwidth}
-        \begin{equation*}
+        \begin{flalign*}
             \max_{j \in \mathcal{J}_t \cup \{0\}} u_{ijt} = \delta_{jt} \only<1>{+ \alert{\cancelto{0}{\mu_{ijt}}}} + \varepsilon_{ijt} \only<2->{\quad\implies\quad \alert<2>{s_{jt}} = \frac{\exp \delta_{jt}}{\alt<2>{\sum_{k \in \mathcal{J}_t \cup \{0\}}}{\alert<3>{1} + \sum_{k \in \mathcal{J}_t}} \exp \delta_{kt}}} \only<4->{\quad\implies\quad \log\frac{s_{jt}}{s_{0t}} = \alert{\delta_{jt}}}
-        \end{equation*}
+        \end{flalign*}
     \end{minipage}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
@@ -259,7 +262,7 @@
         \item Running example: What if we halved an important product's price?
         \begin{itemize}
             \item In your exercise, products $j$ are breakfast cereals; markets $t$ are city-quarters.
-            \item If we estimate the model, we can change $p_{jt}$ and estimate how consumers react.
+            \item If we estimate the model, we can change $p_{jt}$ and predict how consumers react.
         \end{itemize}
         \pause
         \item Specify $\delta_{jt}$ as a function of price $p_{jt}$ and other product characteristics $x_{jt}$.
@@ -338,7 +341,7 @@
             \item E.g.\ if $p_{jt}$ is correlated with fixed effects $\xi_j$ and/or $\xi_t$ in $\xi_{jt} = \xi_j + \xi_t + \Delta\xi_{jt}$.
             \item But do need multiple observations per product and market to add $\xi_j$ and $\xi_t$.
             \pause
-            \item Aside: Related to dynamic panel approach. Let $\xi_{jt} = \rho \xi_{jt-1} + \Delta\xi_{jt}$, estimate $\rho$.
+            \item Related to dynamic panel approaches, e.g.\ let $\xi_{jt} = \phi \xi_{jt-1} + \Delta\xi_{jt}$ and estimate $\phi$.
         \end{itemize}
         \pause
         \item Modern grocery scanner datasets have many thousands of products/markets.
@@ -358,7 +361,7 @@
     \end{equation*}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
-        \item With or without fixed effects, a carefully-chosen IV can be a good solution.
+        \item With or without fixed effects, a carefully-chosen IV $z_{jt}$ can be a good solution.
         \begin{itemize}
             \item Relevance: $\Cov(p_{jt}, z_{jt}) \neq 0$. Exclusion: $\Cov(\xi_{jt}, z_{jt}) = 0$.
         \end{itemize}
@@ -380,6 +383,10 @@
     \end{equation*}
     \vspace{-0.5\baselineskip}
     \begin{wideitemize}
+        \only<2->{\vspace{-0.12\baselineskip}}
+        \only<3->{\vspace{-0.02\baselineskip}}
+        \only<4->{\vspace{0.09\baselineskip}}
+        \only<6->{\vspace{-0.15\baselineskip}}
         \item Typically, prices are marginal costs plus a markup term.
         \only<1>{
             \begin{itemize}
@@ -387,6 +394,9 @@
             \end{itemize}
         }
         \pause
+        \only<3->{\vspace{-0.13\baselineskip}}
+        \only<4->{\vspace{0.09\baselineskip}}
+        \only<6->{\vspace{-0.19\baselineskip}}
         \item \alert{Cost-shifters}: Measures of input prices, tariffs, etc.
         \only<2>{
             \begin{itemize}
@@ -394,6 +404,7 @@
             \end{itemize}
         }
         \pause
+        \only<6->{\vspace{-0.19\baselineskip}}
         \item \defcitealias{hausman1996valuation}{Hausman}\citetalias{hausman1996valuation}: Current price of the same product averaged across \textit{other} locations.
         \only<3>{
             \begin{itemize}
@@ -401,6 +412,8 @@
             \end{itemize}
         }
         \pause
+        \only<5->{\vspace{-0.12\baselineskip}}
+        \only<6->{\vspace{-0.19\baselineskip}}
         \item \defcitealias{waldfogel2003preference}{Waldfogel}\citetalias{waldfogel2003preference}: Average consumer characteristics in \textit{nearby} locations.
         \only<4>{
             \begin{itemize}
@@ -409,6 +422,7 @@
             \end{itemize}
         }
         \pause
+        \only<6->{\vspace{-0.29\baselineskip}}
         \item \defcitealias{berry1995automobile}{BLP}\citetalias{berry1995automobile}: Average characteristics $x_{kt}$ of \textit{competing} products $k \neq j$.
         \only<5>{
             \begin{itemize}
